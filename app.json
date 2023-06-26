@@ -1,4 +1,11 @@
 {
   "name": "eTailize",
-  "displayName": "eTailize"
+  "displayName": "eTailize",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "4e1166da-08fe-42fc-b7a9-b8bcfd548c0e"
+      }
+    }
+  }
 }

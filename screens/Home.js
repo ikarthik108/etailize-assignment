@@ -10,7 +10,6 @@ import {
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {Menu} from 'react-native-feather';
 
 const items = [
   {
