@@ -1,15 +1,13 @@
-import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
   View,
   Text,
   TouchableOpacity,
-  Image,
 } from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
+import {ScrollView} from 'react-native-gesture-handler';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import {ShoppingCart} from 'react-native-feather';
 
 const items = [
   {
@@ -38,35 +36,70 @@ const items = [
     value: 83,
   },
 ];
-
-const Drawer = createDrawerNavigator();
+const categories = [
+  [
+    {
+      icon: '',
+      name: '',
+    },
+    {
+      icon: '',
+      name: 'Airplanes',
+    },
+    {
+      icon: '',
+      name: 'Cars',
+    },
+    {
+      icon: '',
+      name: 'Homes',
+    },
+  ],
+];
 
 export default function HomeScreen({navigation}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#F8E2F7'}}>
-      <View style={styles.top}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              // handle onPress
-            }}></TouchableOpacity>
+      <ScrollView>
+        <View style={styles.top}>
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => {
+                // handle onPress
+              }}></TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Dashboard</Text>
+        <View style={styles.container}>
+          <Text style={styles.title}>Dashboard</Text>
 
-        <View style={styles.stats}>
-          {items.map(({icon, label, value}, index) => (
-            <View key={index} style={styles.statsItem}>
-              <FeatherIcon color="#8C6CAB" name={icon} size={14} />
-
-              <Text style={styles.statsItemLabel}>{label}</Text>
-
-              <Text style={styles.statsItemValue}>{value}</Text>
-            </View>
-          ))}
+          <View style={styles.stats}>
+            {items.map(({icon, label, value}, index) => (
+              <View key={index} style={styles.statsItem}>
+                <Text style={styles.statsItemLabel}>{label}</Text>
+                <View style={styles.categories}>
+                  {categories.map((row, index) => (
+                    <View style={styles.categoriesRow} key={index}>
+                      {row.map(item => (
+                        <TouchableOpacity
+                          style={styles.category}
+                          key={item.name}
+                          onPress={() => {
+                            // handle onPress
+                          }}>
+                          <View style={styles.categoryIcon}>
+                            <Text style={{fontSize: 36}}>{item.icon}</Text>
+                            {/* <ShoppingCart color="#ff" size={20} /> */}
+                          </View>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  ))}
+                </View>
+              </View>
+            ))}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -88,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   statsItem: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingVertical: 12,
@@ -98,11 +131,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   statsItemLabel: {
-    marginLeft: 8,
+    marginLeft: 2,
     marginRight: 'auto',
     fontSize: 15,
     fontWeight: '600',
     color: '#4e4a6d',
+    justifyContent: 'center',
   },
   statsItemValue: {
     fontSize: 15,
@@ -118,9 +152,44 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  headerImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 9999,
+  categories: {
+    marginTop: 12,
+    display: 'flex',
+    flexWrap: 'wrap',
   },
+  categoriesRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    marginHorizontal: -4,
+  },
+  category: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 4,
+  },
+  categoryIcon: {
+    width: '100%',
+    borderRadius: 16,
+    backgroundColor: '#fff',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 36,
+  },
+  categoryText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#505050',
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  // headerImage: {
+  //   width: 40,
+  //   height: 40,
+  //   borderRadius: 9999,
+  // },
 });
